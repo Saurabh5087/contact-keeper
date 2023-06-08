@@ -1,4 +1,8 @@
 import express from 'express';
+import connectDB from './config/db.js';
+
+// Connect to Database
+connectDB();
 
 // Import Routers
 import usersRouter from './routes/users.js';
