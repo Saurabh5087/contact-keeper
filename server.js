@@ -12,6 +12,9 @@ import contactsRouter from './routes/contacts.js';
 // Initialize a express app.
 const app = express();
 
+// Init Middleware for reading/accepting request body data.
+app.use(express.json({ extended: false }));
+
 // Mount Routes
 app.use('/api/users', usersRouter);
 app.use('/api/auth', authRouter);
