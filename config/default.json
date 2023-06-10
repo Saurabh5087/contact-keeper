@@ -1,3 +1,4 @@
 {
-  "mongoURI" : "mongodb+srv://saurabh5087:saurabh5087@cluster0.uhnfcaq.mongodb.net/contact-keeper"
+  "mongoURI" : "mongodb+srv://saurabh5087:saurabh5087@cluster0.uhnfcaq.mongodb.net/contact-keeper",
+  "jwtSecret": "secret"
 }

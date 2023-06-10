@@ -1,5 +1,7 @@
 import express from 'express';
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import config from 'config';
 import User from '../models/User.js';
 import { check, validationResult } from 'express-validator';
 
@@ -27,8 +29,20 @@ router.post('/', [
     user = new User({ name, email, password });
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(password, salt);
-    user.save();
-    res.status(201).json({ msg: "User Created!" });
+    await user.save();
+    
+    const payload = {
+      user: {
+        id: user._id
+      }
+    }
+
+    jwt.sign(payload, config.get('jwtSecret'), {
+      expiresIn: 36000
+    }, (err, token) => {
+      if (err) throw err;
+      res.json({ token });
+    });
 
   } catch (err) {
     console.log(err.message);
